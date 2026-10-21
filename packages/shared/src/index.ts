@@ -26,3 +26,32 @@ export type {
   SeasonalNote,
   CatalogDestination,
 } from './types/catalog.js'
+
+export {
+  BudgetCategorySchema,
+  InterestSchema,
+  SourceSchema,
+  CostLineSchema,
+  TripBriefSchema,
+  ConstraintTypeSchema,
+  ConstraintSchema,
+  PreferenceSchema,
+  DestinationSchema,
+  FreePeriodSchema,
+  ActivitySchema,
+  MealSchema,
+  DaySchema,
+  BudgetEstimateSchema,
+  ItinerarySchema,
+  ItineraryDiffSchema,
+  ConstraintCheckResultSchema,
+  ChangeSnapshotSchema,
+} from './schemas/plan.js'
+
+export {
+  CostRangeSchema,
+  FlightEstimateSchema,
+  AccommodationEstimateSchema,
+  SeasonalNoteSchema,
+  CatalogDestinationSchema,
+} from './schemas/catalog.js'
