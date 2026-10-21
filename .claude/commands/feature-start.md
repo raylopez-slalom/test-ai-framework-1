@@ -220,7 +220,57 @@ If only CLARIFY or ASSUMPTION items:
      - Run: `git checkout -b feature/[ID]-[slug]`
      - Confirm to the developer: `✓ On branch feature/PROJ-123-user-authentication`
      - If the branch already exists, check it out instead of creating a new one
-  4. Start coding
+  4. Implement all acceptance criteria without stopping
+
+---
+
+**Step 7 — Implement (autonomous)**
+
+Work through every acceptance criterion in the dev brief in sequence. Do not
+pause between criteria to ask for confirmation — the brief approval in Step 6
+is the human checkpoint. Keep going until all criteria are done or a genuine
+blocker is hit.
+
+For each acceptance criterion:
+1. Make the code changes required to satisfy it
+2. Run the relevant tests (`npm test`, `pytest`, etc. — check CLAUDE.md for the
+   project's test command)
+3. If tests pass: commit with format `[ID]: [criterion summary]`
+   e.g. `PROJ-123: add JWT validation to auth middleware`
+4. Move to the next criterion
+
+**Stop only when:**
+- A test fails and you cannot determine the fix without human input
+- An ambiguity emerges that would meaningfully change the approach
+  (not a minor detail — something that invalidates the brief)
+- A new BLOCKING dependency or external service is required that wasn't in scope
+- You have completed all acceptance criteria
+
+**When all criteria are done**, report:
+```
+✓ Implementation complete — [N] criteria done
+
+Criteria:
+  ✓ [criterion 1] — committed [hash]
+  ✓ [criterion 2] — committed [hash]
+  ...
+
+Next steps:
+  /spec-check   — verify docs are up to date
+  /code-review  — review before opening PR
+  /pr-ready     — final checklist before requesting review
+```
+
+**If you stop early due to a blocker**, report:
+```
+⚠ Stopped at criterion [N]: [what is blocking]
+
+Completed so far:
+  ✓ [criterion 1] — committed [hash]
+  ✗ [criterion N] — blocked: [reason]
+
+To continue: [what the developer needs to resolve]
+```
 
 ---
 
@@ -256,8 +306,8 @@ The skill uses the "Done" section to understand what's already implemented.
 
 ## What this skill does NOT do
 
-- Does not write any code
-- Does not close or delete JIRA tickets
+- Does not skip the dev brief — implementation never starts without human approval of the brief
+- Does not close or delete JIRA tickets (moves to In Progress; Done is handled by CI on merge)
 - Does not make architecture decisions — flags them for human resolution
 - Does not guarantee the ticket is correctly scoped — that is the PM's responsibility
-- Does not assign tickets or change their status in JIRA
+- Does not open a PR — developer runs /spec-check → /code-review → /pr-ready after implementation
